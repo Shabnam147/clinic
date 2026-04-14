@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Mehta's Clinic | Trusted Healthcare in Bandra, Mumbai</title>
+  <meta name="description" content="Dr. Mehta's Clinic offers expert medical care in Bandra, Mumbai. Book appointments online for general medicine, diagnostics, preventive health & more." />
+  <meta name="keywords" content="doctor bandra mumbai, clinic bandra, dr mehta, general physician mumbai, book doctor appointment" />
+  <meta property="og:title" content="Dr. Mehta's Clinic | Bandra, Mumbai" />
+  <meta property="og:description" content="Trusted healthcare in the heart of Bandra. Book your appointment today." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://drmehta.in" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy: #0f2942;
+      --teal: #1a7f7a;
+      --teal-light: #e8f5f4;
+      --accent: #e8863a;
+      --white: #ffffff;
+      --off-white: #f8f9fb;
+      --text: #1a2535;
+      --muted: #6b7a8d;
+      --border: #e2e8f0;
+      --shadow: 0 4px 24px rgba(15,41,66,0.08);
+      --shadow-lg: 0 12px 48px rgba(15,41,66,0.14);
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'DM Serif Display', serif;
+      line-height: 1.2;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { max-width: 100%; }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow); }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo .logo-icon {
+      width: 38px; height: 38px;
+      background: var(--teal);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .nav-logo .logo-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+    .nav-logo .logo-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      font-size: 0.88rem !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--navy) !important; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ─── HERO ─── */
+    #home {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4a72 60%, var(--teal) 100%);
+      display: flex;
+      align-items: center;
+      padding-top: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #home::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(26,127,122,0.25) 0%, transparent 70%);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9);
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--white);
+      margin-bottom: 20px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: #7ee8e4;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 36px;
+      font-weight: 300;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,134,58,0.4); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 2px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--white);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeUp 0.7s 0.25s ease both;
+    }
+
+    .clinic-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .clinic-card .card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .hours-item {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .hours-item strong { color: var(--text); font-weight: 600; display: block; }
+
+    .quick-contact {
+      display: flex;
+      gap: 10px;
+    }
+    .contact-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.15s;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .contact-btn:hover { transform: translateY(-1px); }
+    .contact-btn.wa { background: #25D366; color: white; }
+    .contact-btn.call { background: var(--teal-light); color: var(--teal); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+    .trust-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .trust-item .ti {
+      font-size: 1.1rem;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 90px 0; }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    .section-header {
+      margin-bottom: 56px;
+    }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--teal-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .service-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── WHY US ─── */
+    #why { background: var(--off-white); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .why-icon {
+      width: 44px; height: 44px;
+      background: var(--teal);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      color: white;
+    }
+    .why-text h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .why-text p {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .doc-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .doc-avatar {
+      width: 110px; height: 110px;
+      background: linear-gradient(135deg, var(--teal-light), #c8ecea);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .doc-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+    }
+    .doc-title {
+      font-size: 0.85rem;
+      color: var(--teal);
+      font-weight: 600;
+      margin: 6px 0 12px;
+    }
+    .doc-bio {
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .doc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .doc-tag {
+      background: var(--teal-light);
+      color: var(--teal);
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    /* ─── BOOKING ─── */
+    #booking {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4a72 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #booking::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(26,127,122,0.15);
+    }
+
+    #booking .section-title { color: var(--white); }
+    #booking .section-desc { color: rgba(255,255,255,0.65); }
+    #booking .section-label { color: #7ee8e4; }
+
+    .booking-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .booking-form {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--off-white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(26,127,122,0.1);
+      background: white;
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--teal);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .submit-btn:hover { background: var(--navy); transform: translateY(-1px); }
+
+    #booking-success {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+    #booking-success .success-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    #booking-success h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    #booking-success p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .booking-info {
+      color: var(--white);
+    }
+
+    .info-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
+    }
+    .info-card h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-card p, .info-card li {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.7);
+      list-style: none;
+      padding: 4px 0;
+    }
+    .info-card ul li::before {
+      content: '✓ ';
+      color: #4ade80;
+    }
+
+    .wa-btn-large {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #25D366;
+      color: white;
+      padding: 16px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .wa-btn-large:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+
+    /* ─── TESTIMONIALS ─── */
+    #testimonials { background: var(--white); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: transform 0.25s;
+    }
+    .testimonial-card:hover { transform: translateY(-3px); }
+
+    .stars {
+      color: #f59e0b;
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+
+    .testimonial-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .author-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .author-meta {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    /* ─── MAP ─── */
+    #location { background: var(--off-white); }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .location-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .detail-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .detail-icon {
+      width: 42px; height: 42px;
+      background: var(--teal-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .detail-text h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+    .detail-text p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .map-container iframe {
+      display: block;
+      width: 100%;
+      height: 380px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
+      padding: 60px 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .logo-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .footer-brand p {
+      font-size: 0.86rem;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-family: 'DM Serif Display', serif;
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li {
+      font-size: 0.86rem;
+      padding: 5px 0;
+    }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: white; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+    }
+
+    /* ─── FLOATING WHATSAPP ─── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      background: #25D366;
+      color: white;
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      cursor: pointer;
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float .wa-tooltip {
+      position: absolute;
+      right: 70px;
+      background: white;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateX(8px);
+      transition: 0.2s;
+      pointer-events: none;
+    }
+    .wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: none; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .booking-layout { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: white;
+        padding: 20px;
+        box-shadow: var(--shadow-lg);
+        gap: 16px;
+        z-index: 999;
+      }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+    }
+  </style>
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "name": "Dr. Mehta's Clinic",
+    "description": "Expert medical care in Bandra, Mumbai",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Hill Road, Bandra West",
+      "addressLocality": "Mumbai",
+      "addressRegion": "Maharashtra",
+      "postalCode": "400050",
+      "addressCountry": "IN"
+    },
+    "telephone": "+91-98765-43210",
+    "openingHours": "Mo-Sa 09:00-20:00",
+    "url": "https://drmehta.in"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-icon">🩺</div>
+        <div>
+          <div class="logo-text">Dr. Mehta's Clinic</div>
+          <div class="logo-sub">Bandra, Mumbai</div>
+        </div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why">About</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#booking" class="nav-cta">Book Appointment</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">
+            <span class="dot"></span>
+            Accepting New Patients
+          </div>
+          <h1 class="hero-title">Your Health is Our<br/><em>Top Priority</em></h1>
+          <p class="hero-desc">
+            Compassionate, expert medical care at Dr. Mehta's Clinic — serving Bandra and Mumbai for over 15 years. Same-day appointments available.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollTo('booking')">
+              📅 Book Appointment
+            </button>
+            <a href="https://wa.me/919876543210?text=Hello%2C%20I%27d%20like%20to%20book%20an%20appointment%20at%20Dr.%20Mehta%27s%20Clinic" target="_blank" class="btn-outline">
+              💬 WhatsApp Us
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div class="stat-num">15+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">10k+</div>
+              <div class="stat-label">Patients Served</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">4.9★</div>
+              <div class="stat-label">Google Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="clinic-card">
+            <div class="card-title">🕐 Clinic Hours</div>
+            <div class="hours-grid">
+              <div class="hours-item"><strong>Mon – Fri</strong>9:00 AM – 8:00 PM</div>
+              <div class="hours-item"><strong>Saturday</strong>9:00 AM – 6:00 PM</div>
+              <div class="hours-item"><strong>Sunday</strong>10:00 AM – 2:00 PM</div>
+              <div class="hours-item"><strong>Emergency</strong>Call anytime</div>
+            </div>
+          </div>
+          <div class="clinic-card">
+            <div class="card-title">📞 Quick Contact</div>
+            <div class="quick-contact">
+              <a href="https://wa.me/919876543210" target="_blank" class="contact-btn wa">💬 WhatsApp</a>
+              <a href="tel:+919876543210" class="contact-btn call">📞 Call Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TRUST BAR ─── -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-inner">
+        <div class="trust-item"><span class="ti">🏥</span> MBBS, MD — Certified Physician</div>
+        <div class="trust-item"><span class="ti">🔒</span> 100% Confidential Consultations</div>
+        <div class="trust-item"><span class="ti">⚡</span> Same-Day Appointments</div>
+        <div class="trust-item"><span class="ti">💳</span> All Major Insurances Accepted</div>
+        <div class="trust-item"><span class="ti">🌐</span> Hindi, English & Marathi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SERVICES ─── -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">What We Offer</div>
+        <h2 class="section-title">Comprehensive Medical Services</h2>
+        <p class="section-desc">From routine check-ups to specialised care — we're here for every step of your health journey.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🩺</div>
+          <div class="service-title">General Medicine</div>
+          <p class="service-desc">Diagnosis and treatment of common illnesses, infections, and chronic conditions with personalised care plans.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔬</div>
+          <div class="service-title">Diagnostics & Lab Tests</div>
+          <p class="service-desc">In-house blood tests, urine analysis, ECG, and referrals to trusted diagnostic labs in Bandra.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <div class="service-title">Preventive Health</div>
+          <p class="service-desc">Annual health check-ups, vaccinations, lifestyle counselling, and early disease screening programs.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">❤️</div>
+          <div class="service-title">Chronic Disease Management</div>
+          <p class="service-desc">Ongoing management of diabetes, hypertension, thyroid disorders, and other chronic conditions.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👶</div>
+          <div class="service-title">Paediatric Care</div>
+          <p class="service-desc">Child health consultations, growth monitoring, immunisations, and adolescent health guidance.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <div class="service-title">Home Visits</div>
+          <p class="service-desc">Doctor-at-home services for elderly patients or those unable to travel — available in Bandra &amp; nearby areas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHY US ─── -->
+  <section id="why">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <div class="section-label">About the Doctor</div>
+          <h2 class="section-title">Trusted Care, Personal Attention</h2>
+          <p class="section-desc">Dr. Mehta brings over 15 years of clinical experience combined with a warm, patient-first approach to every consultation.</p>
+          <div class="why-list">
+            <div class="why-item">
+              <div class="why-icon">🎓</div>
+              <div class="why-text">
+                <h4>Highly Qualified</h4>
+                <p>MBBS from KEM Hospital, MD (General Medicine) from Seth GS Medical College, Mumbai.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">⏱️</div>
+              <div class="why-text">
+                <h4>No Long Waits</h4>
+                <p>Online booking ensures your time is respected. Average wait time under 10 minutes.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">💬</div>
+              <div class="why-text">
+                <h4>WhatsApp Follow-ups</h4>
+                <p>Post-visit support over WhatsApp for prescription queries and test result clarifications.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">🏆</div>
+              <div class="why-text">
+                <h4>Award-Winning Care</h4>
+                <p>Recognised by the Maharashtra Medical Council for excellence in patient outcomes (2022).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-avatar">👨‍⚕️</div>
+          <div class="doc-name">Dr. Arjun Mehta</div>
+          <div class="doc-title">MBBS, MD – General Medicine</div>
+          <p class="doc-bio">
+            Dr. Mehta has been serving the Bandra community since 2009, providing evidence-based medical care with a compassionate, patient-centred approach. He believes in treating the whole person, not just the symptoms.
+          </p>
+          <div class="doc-tags">
+            <span class="doc-tag">General Medicine</span>
+            <span class="doc-tag">Diabetes Care</span>
+            <span class="doc-tag">Hypertension</span>
+            <span class="doc-tag">Preventive Health</span>
+            <span class="doc-tag">Paediatrics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BOOKING ─── -->
+  <section id="booking">
+    <div class="container">
+      <div class="booking-layout">
+        <div>
+          <div class="section-label">Book Online</div>
+          <h2 class="section-title">Schedule Your Appointment</h2>
+          <p class="section-desc">Fill the form and we'll confirm your slot via call or WhatsApp within 30 minutes.</p>
+
+          <div style="margin-top: 32px;">
+            <div class="info-card">
+              <h4>📋 What to Bring</h4>
+              <ul>
+                <li>Previous prescriptions or reports</li>
+                <li>Insurance card (if applicable)</li>
+                <li>List of current medications</li>
+                <li>Aadhaar card for first visit</li>
+              </ul>
+            </div>
+            <div class="info-card">
+              <h4>📍 Location</h4>
+              <p>Shop 4, Mehta House, Hill Road<br/>Bandra West, Mumbai – 400050</p>
+            </div>
+            <a href="https://wa.me/919876543210?text=Hello%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" class="wa-btn-large" style="margin-top: 16px;">
+              <span style="font-size: 1.4rem;">💬</span>
+              Book via WhatsApp Instead
+            </a>
+          </div>
+        </div>
+
+        <div class="booking-form">
+          <div class="form-title">📅 Book an Appointment</div>
+          <div id="booking-form-inner">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" id="f-name" placeholder="Your full name" />
+              </div>
+              <div class="form-group">
+                <label>Mobile Number *</label>
+                <input type="tel" id="f-phone" placeholder="+91 98765 43210" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Preferred Date *</label>
+                <input type="date" id="f-date" />
+              </div>
+              <div class="form-group">
+                <label>Preferred Time *</label>
+                <select id="f-time">
+                  <option value="">Select slot</option>
+                  <option>9:00 AM – 10:00 AM</option>
+                  <option>10:00 AM – 11:00 AM</option>
+                  <option>11:00 AM – 12:00 PM</option>
+                  <option>12:00 PM – 1:00 PM</option>
+                  <option>5:00 PM – 6:00 PM</option>
+                  <option>6:00 PM – 7:00 PM</option>
+                  <option>7:00 PM – 8:00 PM</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Service Required *</label>
+              <select id="f-service">
+                <option value="">Select service</option>
+                <option>General Consultation</option>
+                <option>Diagnostic / Lab Test</option>
+                <option>Preventive Health Check-up</option>
+                <option>Chronic Disease Management</option>
+                <option>Paediatric Consultation</option>
+                <option>Home Visit Request</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Briefly describe your concern</label>
+              <textarea id="f-note" placeholder="E.g. fever for 3 days, need blood sugar test, follow-up visit..."></textarea>
+            </div>
+            <button class="submit-btn" onclick="submitBooking()">
+              📅 Confirm Appointment
+            </button>
+          </div>
+          <div id="booking-success">
+            <div class="success-icon">✅</div>
+            <h3>Appointment Requested!</h3>
+            <p>Thank you! We'll confirm your slot via WhatsApp or call within 30 minutes.</p>
+            <p style="margin-top: 12px;"><strong>Dr. Mehta's Clinic</strong><br/>📞 +91 98765 43210</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ─── -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Patient Reviews</div>
+        <h2 class="section-title">What Our Patients Say</h2>
+        <p class="section-desc">Over 500 five-star reviews on Google. Here's what Bandra residents say about Dr. Mehta.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Dr. Mehta is incredibly thorough and patient. He takes time to explain everything clearly. Best doctor in Bandra, hands down. My whole family visits him."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">PR</div>
+            <div>
+              <div class="author-name">Priya Rao</div>
+              <div class="author-meta">Bandra West · Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"I had a follow-up question about my medication and Dr. Mehta replied on WhatsApp within an hour. That kind of accessibility is rare. Truly grateful."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AK</div>
+            <div>
+              <div class="author-name">Aryan Khan</div>
+              <div class="author-meta">Khar West · Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Booked online in 2 minutes, confirmed in 15. The clinic is spotless, the staff are warm, and Dr. Mehta genuinely cares. No unnecessary tests or medicines."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SM</div>
+            <div>
+              <div class="author-name">Sneha Menon</div>
+              <div class="author-meta">Santacruz · Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"My father is diabetic and Dr. Mehta has been managing his condition brilliantly for 3 years now. Very systematic, always up to date with latest protocols."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">RD</div>
+            <div>
+              <div class="author-name">Rohit Desai</div>
+              <div class="author-meta">Bandra East · Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Got a home visit for my elderly mother within 2 hours of calling. The convenience and quality of care was exceptional. Highly recommend to every family."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">NP</div>
+            <div>
+              <div class="author-name">Nisha Patil</div>
+              <div class="author-meta">Pali Hill · Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Extremely professional. Dr. Mehta diagnosed what two other doctors missed. Clear communicator, evidence-based treatment. Our go-to doctor for the whole colony."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">VS</div>
+            <div>
+              <div class="author-name">Vikram Shah</div>
+              <div class="author-meta">Linking Road · Google Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── LOCATION ─── -->
+  <section id="location">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Find Us</div>
+        <h2 class="section-title">Visit Dr. Mehta's Clinic</h2>
+        <p class="section-desc">Conveniently located on Hill Road, Bandra West — easily accessible by bus, train, and auto.</p>
+      </div>
+      <div class="location-grid">
+        <div class="location-details">
+          <div class="detail-item">
+            <div class="detail-icon">📍</div>
+            <div class="detail-text">
+              <h4>Address</h4>
+              <p>Shop 4, Mehta House, Hill Road<br/>Bandra West, Mumbai – 400050</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon">📞</div>
+            <div class="detail-text">
+              <h4>Phone</h4>
+              <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon">⏰</div>
+            <div class="detail-text">
+              <h4>Clinic Hours</h4>
+              <p>Mon–Fri: 9 AM – 8 PM<br/>Saturday: 9 AM – 6 PM<br/>Sunday: 10 AM – 2 PM</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon">🚉</div>
+            <div class="detail-text">
+              <h4>Getting Here</h4>
+              <p>5 min walk from Bandra Station (West Exit). Bus routes 231, 270 stop nearby.</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon">🅿️</div>
+            <div class="detail-text">
+              <h4>Parking</h4>
+              <p>Street parking available on Hill Road. Paid parking at Mehta House basement.</p>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Bandra+West+Mumbai" target="_blank" class="btn-primary" style="align-self: flex-start; margin-top: 8px;">
+            🗺️ Get Directions
+          </a>
+        </div>
+        <div class="map-container">
+          <!-- Google Maps embed for Bandra, Mumbai -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.5076695098965!2d72.82632!3d19.0596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c93eaaaaaaab%3A0x3f8a4b2bcf1cd7c0!2sBandra%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Dr. Mehta's Clinic Location, Bandra Mumbai">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">🩺 Dr. Mehta's Clinic</div>
+          <p>Trusted medical care in the heart of Bandra, Mumbai. Compassionate doctors, modern diagnostics, and a commitment to your wellbeing.</p>
+          <div style="margin-top: 18px; display: flex; gap: 12px;">
+            <a href="https://wa.me/919876543210" target="_blank" style="background:#25D366;color:white;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;">💬 WhatsApp</a>
+            <a href="tel:+919876543210" style="background:rgba(255,255,255,0.1);color:white;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;">📞 Call</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">General Medicine</a></li>
+            <li><a href="#services">Diagnostics</a></li>
+            <li><a href="#services">Preventive Health</a></li>
+            <li><a href="#services">Chronic Disease</a></li>
+            <li><a href="#services">Paediatric Care</a></li>
+            <li><a href="#services">Home Visits</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#why">About Dr. Mehta</a></li>
+            <li><a href="#booking">Book Appointment</a></li>
+            <li><a href="#testimonials">Patient Reviews</a></li>
+            <li><a href="#location">Find Us</a></li>
+            <li><a href="tel:+919876543210">Emergency Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Dr. Mehta's Clinic, Bandra Mumbai. All rights reserved.</p>
+        <p>Designed for health &amp; wellness</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── FLOATING WHATSAPP ─── -->
+  <a href="https://wa.me/919876543210?text=Hello%20Dr.%20Mehta's%20Clinic%2C%20I%20need%20an%20appointment" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+    <span>💬</span>
+    <div class="wa-tooltip">Chat with us</div>
+  </a>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    // Close menu on link click
+    document.querySelectorAll('#navLinks a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+
+    // Scroll to section
+    function scrollTo(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Set min date to today
+    const dateInput = document.getElementById('f-date');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+    }
+
+    // Booking form
+    function submitBooking() {
+      const name = document.getElementById('f-name').value.trim();
+      const phone = document.getElementById('f-phone').value.trim();
+      const date = document.getElementById('f-date').value;
+      const time = document.getElementById('f-time').value;
+      const service = document.getElementById('f-service').value;
+      const note = document.getElementById('f-note').value.trim();
+
+      if (!name || !phone || !date || !time || !service) {
+        alert('Please fill in all required fields marked with *');
+        return;
+      }
+
+      // Save appointment to localStorage for admin dashboard
+      const appointment = {
+        id: 'APT-' + Date.now(),
+        name, phone, date, time, service, note,
+        status: 'pending',
+        bookedAt: new Date().toISOString()
+      };
+      const existing = JSON.parse(localStorage.getItem('drMehta_appointments') || '[]');
+      existing.unshift(appointment);
+      localStorage.setItem('drMehta_appointments', JSON.stringify(existing));
+
+      // Show success state
+      document.getElementById('booking-form-inner').style.display = 'none';
+      document.getElementById('booking-success').style.display = 'block';
+
+      // Also open WhatsApp with booking details
+      const msg = `Hello Dr. Mehta's Clinic! I'd like to book an appointment.
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+📅 Date: ${date}
+🕐 Time: ${time}
+🩺 Service: ${service}
+📝 Note: ${note || 'None'}
+
+Please confirm my slot. Thank you!`;
+
+      setTimeout(() => {
+        window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`, '_blank');
+      }, 800);
+    }
+
+    // Animate elements on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .testimonial-card, .why-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

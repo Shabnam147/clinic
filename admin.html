@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin – Dr. Mehta's Clinic</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0f2942;
+      --teal: #1a7f7a;
+      --teal-light: #e8f5f4;
+      --accent: #e8863a;
+      --white: #ffffff;
+      --off-white: #f4f6f9;
+      --text: #1a2535;
+      --muted: #6b7a8d;
+      --border: #e2e8f0;
+      --shadow: 0 4px 24px rgba(15,41,66,0.08);
+      --shadow-lg: 0 12px 48px rgba(15,41,66,0.14);
+      --radius: 14px;
+      --radius-sm: 8px;
+      --sidebar: 240px;
+
+      --status-pending-bg: #fef9c3; --status-pending-c: #854d0e;
+      --status-confirmed-bg: #dcfce7; --status-confirmed-c: #166534;
+      --status-cancelled-bg: #fee2e2; --status-cancelled-c: #991b1b;
+      --status-completed-bg: #e0f2fe; --status-completed-c: #0c4a6e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); }
+    h1,h2,h3,h4 { font-family: 'DM Serif Display', serif; }
+
+    /* ─── LOGIN ─── */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4a72 60%, var(--teal) 100%);
+    }
+
+    .login-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .login-logo .icon {
+      width: 64px; height: 64px;
+      background: var(--teal);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 14px;
+    }
+    .login-logo h2 { font-size: 1.5rem; color: var(--navy); }
+    .login-logo p { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+
+    .login-group { margin-bottom: 18px; }
+    .login-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+    .login-group input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--off-white);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .login-group input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(26,127,122,0.12);
+      background: white;
+    }
+
+    .login-error {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: var(--teal);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .login-btn:hover { background: var(--navy); transform: translateY(-1px); }
+
+    /* ─── DASHBOARD ─── */
+    #dashboard { display: none; min-height: 100vh; }
+
+    .layout { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar);
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .sidebar-logo {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .sidebar-logo .sl-icon {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+    .sidebar-logo .sl-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: white;
+      line-height: 1.2;
+    }
+    .sidebar-logo .sl-role {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.45);
+      margin-top: 3px;
+    }
+
+    .sidebar-nav {
+      padding: 16px 12px;
+      flex: 1;
+    }
+    .nav-section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      padding: 12px 8px 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-bottom: 2px;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.07); color: white; }
+    .nav-item.active { background: var(--teal); color: white; }
+    .nav-item .ni { font-size: 1rem; width: 20px; text-align: center; }
+    .nav-item .badge {
+      margin-left: auto;
+      background: var(--accent);
+      color: white;
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 50px;
+      font-weight: 700;
+    }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .logout-btn:hover { background: rgba(255,0,0,0.1); color: #fca5a5; }
+
+    /* MAIN CONTENT */
+    .main {
+      margin-left: var(--sidebar);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--navy);
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .topbar-date {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .admin-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal-light);
+      color: var(--teal);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .admin-avatar {
+      width: 30px; height: 30px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .content { padding: 28px; flex: 1; }
+
+    /* ─── PAGES ─── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ─── STAT CARDS ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-box::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 4px;
+      height: 100%;
+    }
+    .stat-box.c1::after { background: var(--teal); }
+    .stat-box.c2::after { background: #f59e0b; }
+    .stat-box.c3::after { background: #22c55e; }
+    .stat-box.c4::after { background: var(--accent); }
+
+    .stat-box-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .stat-box-val {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .stat-box-sub {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .stat-box-icon {
+      position: absolute;
+      top: 18px; right: 20px;
+      font-size: 1.6rem;
+      opacity: 0.15;
+    }
+
+    /* ─── TABLE ─── */
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .card-header h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+    }
+    .card-header .ch-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-box {
+      padding: 8px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+      width: 220px;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus { border-color: var(--teal); }
+
+    .filter-select {
+      padding: 8px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+      background: white;
+      cursor: pointer;
+    }
+
+    .icon-btn {
+      padding: 8px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text);
+    }
+    .icon-btn:hover { background: var(--off-white); border-color: var(--teal); }
+    .icon-btn.danger { color: #991b1b; }
+    .icon-btn.danger:hover { background: #fee2e2; border-color: #fca5a5; }
+
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    thead { background: var(--off-white); }
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    td {
+      padding: 14px 16px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: middle;
+    }
+    tr:hover td { background: #fafbfc; }
+
+    .td-name { font-weight: 600; color: var(--navy); }
+    .td-id { font-size: 0.75rem; color: var(--muted); font-family: monospace; }
+    .td-phone a { color: var(--teal); font-weight: 500; }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: capitalize;
+      white-space: nowrap;
+    }
+    .badge-status.pending { background: var(--status-pending-bg); color: var(--status-pending-c); }
+    .badge-status.confirmed { background: var(--status-confirmed-bg); color: var(--status-confirmed-c); }
+    .badge-status.cancelled { background: var(--status-cancelled-bg); color: var(--status-cancelled-c); }
+    .badge-status.completed { background: var(--status-completed-bg); color: var(--status-completed-c); }
+
+    .action-btns { display: flex; gap: 6px; }
+    .act-btn {
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.15s;
+    }
+    .act-btn:hover { opacity: 0.8; }
+    .act-btn.confirm { background: var(--status-confirmed-bg); color: var(--status-confirmed-c); }
+    .act-btn.complete { background: var(--status-completed-bg); color: var(--status-completed-c); }
+    .act-btn.cancel { background: var(--status-cancelled-bg); color: var(--status-cancelled-c); }
+    .act-btn.delete { background: #fee2e2; color: #991b1b; }
+    .act-btn.wa { background: #dcfce7; color: #166534; }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty-state .es-icon { font-size: 3rem; margin-bottom: 14px; }
+    .empty-state h4 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--navy); margin-bottom: 6px; }
+    .empty-state p { font-size: 0.86rem; }
+
+    /* ─── ADD APPOINTMENT FORM ─── */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 24px; }
+    .fg-full { grid-column: 1 / -1; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--navy); margin-bottom: 7px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--off-white);
+      outline: none;
+      transition: 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(26,127,122,0.1);
+      background: white;
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-actions { padding: 0 24px 24px; display: flex; gap: 12px; }
+    .btn-teal { background: var(--teal); color: white; border: none; padding: 12px 24px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.15s; }
+    .btn-teal:hover { background: var(--navy); }
+    .btn-ghost { background: none; border: 1.5px solid var(--border); padding: 12px 24px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; color: var(--muted); transition: 0.15s; }
+    .btn-ghost:hover { border-color: var(--navy); color: var(--navy); }
+
+    /* ─── SETTINGS ─── */
+    .settings-section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .ss-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ss-body { padding: 24px; }
+    .ss-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .ss-row:last-child { border-bottom: none; }
+    .ss-row strong { color: var(--navy); font-weight: 600; display: block; }
+    .ss-row span { color: var(--muted); font-size: 0.8rem; }
+
+    .toggle {
+      width: 44px; height: 24px;
+      background: var(--teal);
+      border-radius: 50px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .toggle.off { background: var(--border); }
+    .toggle.off::after { transform: none; }
+    .toggle.on::after { transform: translateX(20px); }
+
+    /* ─── TOAST ─── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--navy);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      z-index: 9999;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,41,66,0.5);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: white;
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 500px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-header h3 { font-family: 'DM Serif Display', serif; color: var(--navy); }
+    .modal-close {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: var(--off-white);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-body { padding: 24px; }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-row .dr-label { color: var(--muted); font-weight: 500; }
+    .detail-row .dr-val { color: var(--navy); font-weight: 600; text-align: right; }
+    .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
+
+    /* ─── CHART ─── */
+    .chart-bar-wrap { padding: 24px; }
+    .chart-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+    }
+    .chart-bar-label { width: 120px; color: var(--muted); font-weight: 500; flex-shrink: 0; }
+    .chart-bar-track {
+      flex: 1;
+      background: var(--off-white);
+      border-radius: 50px;
+      height: 10px;
+      overflow: hidden;
+    }
+    .chart-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), #2dd4bf);
+      border-radius: 50px;
+      transition: width 1s ease;
+    }
+    .chart-bar-count { width: 30px; text-align: right; font-weight: 700; color: var(--navy); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); transition: 0.3s; }
+      .sidebar.open { transform: none; }
+      .main { margin-left: 0; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .topbar { padding: 0 16px; }
+      .content { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── LOGIN SCREEN ─── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="icon">🏥</div>
+      <h2>Admin Portal</h2>
+      <p>Dr. Mehta's Clinic — Staff Access Only</p>
+    </div>
+    <div id="login-error" class="login-error">⚠️ Incorrect username or password.</div>
+    <div class="login-group">
+      <label>Username</label>
+      <input type="text" id="li-user" placeholder="Enter username" autocomplete="username" />
+    </div>
+    <div class="login-group">
+      <label>Password</label>
+      <input type="password" id="li-pass" placeholder="Enter password" autocomplete="current-password"
+             onkeydown="if(event.key==='Enter') doLogin()" />
+    </div>
+    <button class="login-btn" onclick="doLogin()">🔐 Sign In</button>
+    <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:20px;">
+      Secure admin access. Unauthorised access is prohibited.
+    </p>
+  </div>
+</div>
+
+<!-- ─── DASHBOARD ─── -->
+<div id="dashboard">
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="sl-icon">🏥</div>
+        <div class="sl-name">Dr. Mehta's Clinic</div>
+        <div class="sl-role">Admin Dashboard</div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Main</div>
+        <div class="nav-item active" onclick="showPage('overview')">
+          <span class="ni">📊</span> Overview
+        </div>
+        <div class="nav-item" onclick="showPage('appointments')">
+          <span class="ni">📅</span> Appointments
+          <span class="badge" id="pending-badge">0</span>
+        </div>
+        <div class="nav-item" onclick="showPage('add')">
+          <span class="ni">➕</span> Add Booking
+        </div>
+        <div class="nav-section-label">Manage</div>
+        <div class="nav-item" onclick="showPage('analytics')">
+          <span class="ni">📈</span> Analytics
+        </div>
+        <div class="nav-item" onclick="showPage('settings')">
+          <span class="ni">⚙️</span> Settings
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" onclick="doLogout()">
+          🚪 Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="topbar">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button onclick="document.getElementById('sidebar').classList.toggle('open')"
+                  style="display:none;background:none;border:none;font-size:1.3rem;cursor:pointer;" id="menu-toggle">☰</button>
+          <div class="topbar-title" id="page-title">Overview</div>
+        </div>
+        <div class="topbar-right">
+          <span class="topbar-date" id="topbar-date"></span>
+          <div class="admin-chip">
+            <div class="admin-avatar">A</div>
+            admin
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- ─── OVERVIEW PAGE ─── -->
+        <div class="page active" id="page-overview">
+          <div class="stats-row">
+            <div class="stat-box c1">
+              <div class="stat-box-icon">📅</div>
+              <div class="stat-box-label">Total Bookings</div>
+              <div class="stat-box-val" id="s-total">0</div>
+              <div class="stat-box-sub">All time</div>
+            </div>
+            <div class="stat-box c2">
+              <div class="stat-box-icon">⏳</div>
+              <div class="stat-box-label">Pending</div>
+              <div class="stat-box-val" id="s-pending">0</div>
+              <div class="stat-box-sub">Awaiting confirmation</div>
+            </div>
+            <div class="stat-box c3">
+              <div class="stat-box-icon">✅</div>
+              <div class="stat-box-label">Confirmed</div>
+              <div class="stat-box-val" id="s-confirmed">0</div>
+              <div class="stat-box-sub">This month</div>
+            </div>
+            <div class="stat-box c4">
+              <div class="stat-box-icon">🩺</div>
+              <div class="stat-box-label">Completed</div>
+              <div class="stat-box-val" id="s-completed">0</div>
+              <div class="stat-box-sub">All time</div>
+            </div>
+          </div>
+
+          <!-- Recent bookings -->
+          <div class="card">
+            <div class="card-header">
+              <h3>📋 Recent Appointments</h3>
+              <button class="icon-btn" onclick="showPage('appointments')">View All →</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Patient</th>
+                    <th>Service</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── APPOINTMENTS PAGE ─── -->
+        <div class="page" id="page-appointments">
+          <div class="card">
+            <div class="card-header">
+              <h3>📅 All Appointments</h3>
+              <div class="ch-right">
+                <input class="search-box" type="text" placeholder="🔍 Search patient..." oninput="renderTable()" id="search-input" />
+                <select class="filter-select" onchange="renderTable()" id="filter-status">
+                  <option value="">All Statuses</option>
+                  <option value="pending">Pending</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+                <button class="icon-btn danger" onclick="clearAll()">🗑 Clear All</button>
+                <button class="icon-btn" onclick="exportCSV()">⬇ Export CSV</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Patient</th>
+                    <th>Phone</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="main-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── ADD APPOINTMENT PAGE ─── -->
+        <div class="page" id="page-add">
+          <div class="card">
+            <div class="card-header">
+              <h3>➕ Add New Appointment</h3>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Patient Full Name *</label>
+                <input type="text" id="a-name" placeholder="Full name" />
+              </div>
+              <div class="form-group">
+                <label>Mobile Number *</label>
+                <input type="tel" id="a-phone" placeholder="+91 98765 43210" />
+              </div>
+              <div class="form-group">
+                <label>Date *</label>
+                <input type="date" id="a-date" />
+              </div>
+              <div class="form-group">
+                <label>Time Slot *</label>
+                <select id="a-time">
+                  <option value="">Select slot</option>
+                  <option>9:00 AM – 10:00 AM</option>
+                  <option>10:00 AM – 11:00 AM</option>
+                  <option>11:00 AM – 12:00 PM</option>
+                  <option>12:00 PM – 1:00 PM</option>
+                  <option>5:00 PM – 6:00 PM</option>
+                  <option>6:00 PM – 7:00 PM</option>
+                  <option>7:00 PM – 8:00 PM</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Service *</label>
+                <select id="a-service">
+                  <option value="">Select service</option>
+                  <option>General Consultation</option>
+                  <option>Diagnostic / Lab Test</option>
+                  <option>Preventive Health Check-up</option>
+                  <option>Chronic Disease Management</option>
+                  <option>Paediatric Consultation</option>
+                  <option>Home Visit Request</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Status</label>
+                <select id="a-status">
+                  <option value="pending">Pending</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+              <div class="form-group fg-full">
+                <label>Notes</label>
+                <textarea id="a-note" placeholder="Optional: reason for visit, notes..."></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-teal" onclick="adminAddAppointment()">✅ Save Appointment</button>
+              <button class="btn-ghost" onclick="clearAddForm()">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── ANALYTICS PAGE ─── -->
+        <div class="page" id="page-analytics">
+          <div class="stats-row" style="grid-template-columns:repeat(2,1fr);">
+            <div class="card" style="margin:0;">
+              <div class="card-header"><h3>🩺 Bookings by Service</h3></div>
+              <div class="chart-bar-wrap" id="service-chart"></div>
+            </div>
+            <div class="card" style="margin:0;">
+              <div class="card-header"><h3>📊 Bookings by Status</h3></div>
+              <div class="chart-bar-wrap" id="status-chart"></div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:18px;">
+            <div class="card-header"><h3>📅 Upcoming Appointments (Next 7 Days)</h3></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Patient</th><th>Phone</th><th>Service</th><th>Date</th><th>Time</th><th>Status</th></tr></thead>
+                <tbody id="upcoming-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── SETTINGS PAGE ─── -->
+        <div class="page" id="page-settings">
+          <div class="settings-section">
+            <div class="ss-header">🏥 Clinic Information</div>
+            <div class="ss-body">
+              <div class="ss-row">
+                <div><strong>Clinic Name</strong><span>Dr. Mehta's Clinic</span></div>
+                <span style="color:var(--muted);font-size:0.82rem;">Bandra, Mumbai</span>
+              </div>
+              <div class="ss-row">
+                <div><strong>Phone Number</strong><span>Primary contact</span></div>
+                <span style="font-weight:600;">+91 98765 43210</span>
+              </div>
+              <div class="ss-row">
+                <div><strong>WhatsApp Business</strong><span>Auto-message on booking</span></div>
+                <div class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div>
+              </div>
+              <div class="ss-row">
+                <div><strong>Online Bookings</strong><span>Accept from website</span></div>
+                <div class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="ss-header">🔐 Security</div>
+            <div class="ss-body">
+              <div class="ss-row">
+                <div><strong>Admin Username</strong><span>Login credential</span></div>
+                <span style="font-weight:600;font-family:monospace;">admin</span>
+              </div>
+              <div class="ss-row">
+                <div><strong>Password</strong><span>Last changed: today</span></div>
+                <span style="font-weight:600;font-family:monospace;">••••••••</span>
+              </div>
+              <div class="ss-row">
+                <div><strong>Session Timeout</strong><span>Auto-logout after inactivity</span></div>
+                <span style="font-weight:600;">30 minutes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="ss-header">🗄️ Data Management</div>
+            <div class="ss-body">
+              <div class="ss-row">
+                <div><strong>Total Records</strong><span>Stored appointments</span></div>
+                <span class="badge-status confirmed" id="total-records">0 records</span>
+              </div>
+              <div class="ss-row">
+                <div><strong>Export All Data</strong><span>Download as CSV</span></div>
+                <button class="icon-btn" onclick="exportCSV()">⬇ Export CSV</button>
+              </div>
+              <div class="ss-row">
+                <div><strong>Clear All Records</strong><span>Permanently delete all appointments</span></div>
+                <button class="icon-btn danger" onclick="clearAll()">🗑 Delete All</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="ss-header">🌐 Website Links</div>
+            <div class="ss-body">
+              <div class="ss-row">
+                <div><strong>Main Website</strong><span>Patient-facing site</span></div>
+                <a href="dr-mehta-clinic.html" target="_blank" class="icon-btn">🔗 Open Site</a>
+              </div>
+              <div class="ss-row">
+                <div><strong>WhatsApp Business</strong><span>Message patients directly</span></div>
+                <a href="https://wa.me/919876543210" target="_blank" class="icon-btn">💬 Open WhatsApp</a>
+              </div>
+              <div class="ss-row">
+                <div><strong>Google Maps</strong><span>Clinic location</span></div>
+                <a href="https://maps.google.com/?q=Bandra+West+Mumbai" target="_blank" class="icon-btn">🗺️ Open Maps</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /main -->
+  </div><!-- /layout -->
+</div><!-- /dashboard -->
+
+<!-- ─── DETAIL MODAL ─── -->
+<div class="modal-overlay" id="detail-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>📋 Appointment Details</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<!-- ─── TOAST ─── -->
+<div id="toast"></div>
+
+<script>
+  // ─── AUTH ───
+  const CREDENTIALS = { user: 'admin', pass: 'password' };
+  let isLoggedIn = false;
+
+  function doLogin() {
+    const u = document.getElementById('li-user').value.trim();
+    const p = document.getElementById('li-pass').value;
+    if (u === CREDENTIALS.user && p === CREDENTIALS.pass) {
+      isLoggedIn = true;
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      initDashboard();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('li-pass').value = '';
+    }
+  }
+
+  function doLogout() {
+    isLoggedIn = false;
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('li-user').value = '';
+    document.getElementById('li-pass').value = '';
+    document.getElementById('login-error').style.display = 'none';
+  }
+
+  // ─── DATA ───
+  function getAppointments() {
+    return JSON.parse(localStorage.getItem('drMehta_appointments') || '[]');
+  }
+  function saveAppointments(data) {
+    localStorage.setItem('drMehta_appointments', JSON.stringify(data));
+  }
+
+  // ─── SEED DEMO DATA if empty ───
+  function seedDemo() {
+    if (getAppointments().length > 0) return;
+    const demos = [
+      { id:'APT-001', name:'Priya Rao', phone:'9876543001', date:'2025-08-10', time:'9:00 AM – 10:00 AM', service:'General Consultation', note:'Fever for 3 days', status:'completed', bookedAt:'2025-08-08T10:00:00.000Z' },
+      { id:'APT-002', name:'Aryan Khan', phone:'9876543002', date:'2025-08-14', time:'11:00 AM – 12:00 PM', service:'Diagnostic / Lab Test', note:'Fasting blood sugar', status:'confirmed', bookedAt:'2025-08-12T09:30:00.000Z' },
+      { id:'APT-003', name:'Sneha Menon', phone:'9876543003', date:'2025-08-15', time:'5:00 PM – 6:00 PM', service:'Preventive Health Check-up', note:'Annual check-up', status:'pending', bookedAt:'2025-08-13T14:00:00.000Z' },
+      { id:'APT-004', name:'Rohit Desai', phone:'9876543004', date:'2025-08-16', time:'10:00 AM – 11:00 AM', service:'Chronic Disease Management', note:'Diabetes follow-up', status:'pending', bookedAt:'2025-08-13T16:00:00.000Z' },
+      { id:'APT-005', name:'Nisha Patil', phone:'9876543005', date:'2025-08-17', time:'7:00 PM – 8:00 PM', service:'Home Visit Request', note:'Elderly mother, mobility issues', status:'confirmed', bookedAt:'2025-08-14T08:00:00.000Z' },
+      { id:'APT-006', name:'Vikram Shah', phone:'9876543006', date:'2025-08-18', time:'12:00 PM – 1:00 PM', service:'Paediatric Consultation', note:'Child rash on arms', status:'pending', bookedAt:'2025-08-14T11:00:00.000Z' },
+    ];
+    saveAppointments(demos);
+  }
+
+  // ─── INIT ───
+  function initDashboard() {
+    seedDemo();
+    updateTopbarDate();
+    renderStats();
+    renderTable();
+    renderRecent();
+    renderAnalytics();
+    document.getElementById('total-records').textContent = getAppointments().length + ' records';
+    document.getElementById('a-date').setAttribute('min', new Date().toISOString().split('T')[0]);
+    if (window.innerWidth <= 768) {
+      document.getElementById('menu-toggle').style.display = 'block';
+    }
+  }
+
+  function updateTopbarDate() {
+    const d = new Date();
+    document.getElementById('topbar-date').textContent = d.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+  }
+
+  // ─── PAGES ───
+  const pageNames = { overview:'Overview', appointments:'Appointments', add:'Add Booking', analytics:'Analytics', settings:'Settings' };
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.querySelector(`.nav-item[onclick*="${name}"]`).classList.add('active');
+    document.getElementById('page-title').textContent = pageNames[name];
+    if (name === 'appointments') renderTable();
+    if (name === 'analytics') renderAnalytics();
+    if (name === 'overview') { renderStats(); renderRecent(); }
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  // ─── STATS ───
+  function renderStats() {
+    const data = getAppointments();
+    document.getElementById('s-total').textContent = data.length;
+    document.getElementById('s-pending').textContent = data.filter(a => a.status === 'pending').length;
+    document.getElementById('s-confirmed').textContent = data.filter(a => a.status === 'confirmed').length;
+    document.getElementById('s-completed').textContent = data.filter(a => a.status === 'completed').length;
+    const pending = data.filter(a => a.status === 'pending').length;
+    document.getElementById('pending-badge').textContent = pending;
+    document.getElementById('pending-badge').style.display = pending ? '' : 'none';
+  }
+
+  // ─── BADGE HTML ───
+  const statusDot = { pending:'⏳', confirmed:'✅', completed:'🩺', cancelled:'❌' };
+  function badgeHtml(status) {
+    return `<span class="badge-status ${status}">${statusDot[status] || ''} ${status}</span>`;
+  }
+
+  // ─── RECENT TABLE ───
+  function renderRecent() {
+    const data = getAppointments().slice(0, 5);
+    const tbody = document.getElementById('recent-tbody');
+    if (!data.length) {
+      tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><div class="es-icon">📭</div><h4>No appointments yet</h4><p>Bookings from the website will appear here.</p></div></td></tr>`;
+      return;
+    }
+    tbody.innerHTML = data.map(a => `
+      <tr>
+        <td><div class="td-name">${esc(a.name)}</div><div class="td-id">${esc(a.id)}</div></td>
+        <td>${esc(a.service)}</td>
+        <td>${esc(a.date)}<br/><span style="color:var(--muted);font-size:0.78rem;">${esc(a.time)}</span></td>
+        <td>${badgeHtml(a.status)}</td>
+        <td><div class="action-btns">
+          ${a.status === 'pending' ? `<button class="act-btn confirm" onclick="updateStatus('${a.id}','confirmed')">Confirm</button>` : ''}
+          ${a.status === 'confirmed' ? `<button class="act-btn complete" onclick="updateStatus('${a.id}','completed')">Complete</button>` : ''}
+          <button class="act-btn wa" onclick="waContact('${a.phone}','${esc(a.name)}')">💬</button>
+        </div></td>
+      </tr>`).join('');
+  }
+
+  // ─── MAIN TABLE ───
+  function renderTable() {
+    const search = (document.getElementById('search-input')?.value || '').toLowerCase();
+    const filter = document.getElementById('filter-status')?.value || '';
+    let data = getAppointments();
+    if (search) data = data.filter(a => a.name.toLowerCase().includes(search) || a.phone.includes(search) || a.service.toLowerCase().includes(search));
+    if (filter) data = data.filter(a => a.status === filter);
+    const tbody = document.getElementById('main-tbody');
+    if (!tbody) return;
+    if (!data.length) {
+      tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><div class="es-icon">📭</div><h4>No appointments found</h4><p>Try adjusting your search or filter.</p></div></td></tr>`;
+      return;
+    }
+    tbody.innerHTML = data.map(a => `
+      <tr>
+        <td class="td-id">${esc(a.id)}</td>
+        <td><div class="td-name">${esc(a.name)}</div></td>
+        <td class="td-phone"><a href="tel:${esc(a.phone)}">${esc(a.phone)}</a></td>
+        <td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(a.service)}</td>
+        <td>${esc(a.date)}</td>
+        <td style="white-space:nowrap;">${esc(a.time)}</td>
+        <td>${badgeHtml(a.status)}</td>
+        <td><div class="action-btns">
+          <button class="act-btn confirm" onclick="showDetail('${a.id}')">👁</button>
+          ${a.status === 'pending' ? `<button class="act-btn confirm" onclick="updateStatus('${a.id}','confirmed')">✓</button>` : ''}
+          ${a.status === 'confirmed' ? `<button class="act-btn complete" onclick="updateStatus('${a.id}','completed')">🩺</button>` : ''}
+          ${a.status !== 'cancelled' && a.status !== 'completed' ? `<button class="act-btn cancel" onclick="updateStatus('${a.id}','cancelled')">✕</button>` : ''}
+          <button class="act-btn wa" onclick="waContact('${a.phone}','${esc(a.name)}')">💬</button>
+          <button class="act-btn delete" onclick="deleteAppointment('${a.id}')">🗑</button>
+        </div></td>
+      </tr>`).join('');
+  }
+
+  // ─── ACTIONS ───
+  function updateStatus(id, status) {
+    const data = getAppointments();
+    const appt = data.find(a => a.id === id);
+    if (!appt) return;
+    appt.status = status;
+    saveAppointments(data);
+    renderTable(); renderRecent(); renderStats();
+    showToast(`✅ Appointment ${status}!`);
+    document.getElementById('total-records').textContent = data.length + ' records';
+  }
+
+  function deleteAppointment(id) {
+    if (!confirm('Delete this appointment permanently?')) return;
+    const data = getAppointments().filter(a => a.id !== id);
+    saveAppointments(data);
+    renderTable(); renderRecent(); renderStats();
+    showToast('🗑 Appointment deleted.');
+    document.getElementById('total-records').textContent = data.length + ' records';
+  }
+
+  function clearAll() {
+    if (!confirm('Delete ALL appointments permanently? This cannot be undone.')) return;
+    saveAppointments([]);
+    renderTable(); renderRecent(); renderStats(); renderAnalytics();
+    showToast('🗑 All appointments cleared.');
+    document.getElementById('total-records').textContent = '0 records';
+  }
+
+  function waContact(phone, name) {
+    const msg = `Hello ${name}, this is Dr. Mehta's Clinic. We're confirming your appointment. Please let us know if you have any questions.`;
+    window.open(`https://wa.me/91${phone.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  // ─── ADMIN ADD APPOINTMENT ───
+  function adminAddAppointment() {
+    const name = document.getElementById('a-name').value.trim();
+    const phone = document.getElementById('a-phone').value.trim();
+    const date = document.getElementById('a-date').value;
+    const time = document.getElementById('a-time').value;
+    const service = document.getElementById('a-service').value;
+    const status = document.getElementById('a-status').value;
+    const note = document.getElementById('a-note').value.trim();
+    if (!name || !phone || !date || !time || !service) { alert('Please fill all required fields.'); return; }
+    const appt = { id:'APT-'+Date.now(), name, phone, date, time, service, note, status, bookedAt: new Date().toISOString() };
+    const data = getAppointments();
+    data.unshift(appt);
+    saveAppointments(data);
+    renderStats(); renderRecent();
+    clearAddForm();
+    showToast('✅ Appointment added!');
+    document.getElementById('total-records').textContent = data.length + ' records';
+    showPage('appointments');
+  }
+
+  function clearAddForm() {
+    ['a-name','a-phone','a-date','a-time','a-service','a-status','a-note'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = el.tagName === 'SELECT' ? el.options[0]?.value || '' : '';
+    });
+  }
+
+  // ─── DETAIL MODAL ───
+  function showDetail(id) {
+    const a = getAppointments().find(x => x.id === id);
+    if (!a) return;
+    document.getElementById('modal-body').innerHTML = `
+      <div class="detail-row"><span class="dr-label">ID</span><span class="dr-val" style="font-family:monospace;">${esc(a.id)}</span></div>
+      <div class="detail-row"><span class="dr-label">Patient Name</span><span class="dr-val">${esc(a.name)}</span></div>
+      <div class="detail-row"><span class="dr-label">Phone</span><span class="dr-val"><a href="tel:${esc(a.phone)}" style="color:var(--teal);">${esc(a.phone)}</a></span></div>
+      <div class="detail-row"><span class="dr-label">Service</span><span class="dr-val">${esc(a.service)}</span></div>
+      <div class="detail-row"><span class="dr-label">Date</span><span class="dr-val">${esc(a.date)}</span></div>
+      <div class="detail-row"><span class="dr-label">Time Slot</span><span class="dr-val">${esc(a.time)}</span></div>
+      <div class="detail-row"><span class="dr-label">Status</span><span class="dr-val">${badgeHtml(a.status)}</span></div>
+      <div class="detail-row"><span class="dr-label">Notes</span><span class="dr-val">${esc(a.note) || '—'}</span></div>
+      <div class="detail-row"><span class="dr-label">Booked At</span><span class="dr-val">${new Date(a.bookedAt).toLocaleString('en-IN')}</span></div>
+    `;
+    document.getElementById('modal-footer').innerHTML = `
+      <button class="btn-ghost" onclick="closeModal()">Close</button>
+      <button class="btn-teal" onclick="waContact('${a.phone}','${esc(a.name)}');closeModal()">💬 WhatsApp</button>
+      ${a.status === 'pending' ? `<button class="btn-teal" onclick="updateStatus('${a.id}','confirmed');closeModal()">✅ Confirm</button>` : ''}
+    `;
+    document.getElementById('detail-modal').classList.add('open');
+  }
+  function closeModal() { document.getElementById('detail-modal').classList.remove('open'); }
+
+  // ─── ANALYTICS ───
+  function renderAnalytics() {
+    const data = getAppointments();
+
+    // Service breakdown
+    const services = {};
+    data.forEach(a => { services[a.service] = (services[a.service] || 0) + 1; });
+    const maxS = Math.max(...Object.values(services), 1);
+    document.getElementById('service-chart').innerHTML = Object.entries(services)
+      .sort((a,b) => b[1]-a[1])
+      .map(([s,c]) => `
+        <div class="chart-bar-row">
+          <div class="chart-bar-label" title="${s}">${s.length > 18 ? s.slice(0,16)+'…' : s}</div>
+          <div class="chart-bar-track"><div class="chart-bar-fill" style="width:${(c/maxS)*100}%"></div></div>
+          <div class="chart-bar-count">${c}</div>
+        </div>`).join('') || '<p style="color:var(--muted);padding:20px;">No data yet.</p>';
+
+    // Status breakdown
+    const statuses = { pending:0, confirmed:0, completed:0, cancelled:0 };
+    data.forEach(a => { if (statuses[a.status] !== undefined) statuses[a.status]++; });
+    const maxSt = Math.max(...Object.values(statuses), 1);
+    document.getElementById('status-chart').innerHTML = Object.entries(statuses)
+      .map(([s,c]) => `
+        <div class="chart-bar-row">
+          <div class="chart-bar-label">${statusDot[s]} ${s.charAt(0).toUpperCase()+s.slice(1)}</div>
+          <div class="chart-bar-track"><div class="chart-bar-fill" style="width:${(c/maxSt)*100}%"></div></div>
+          <div class="chart-bar-count">${c}</div>
+        </div>`).join('');
+
+    // Upcoming
+    const today = new Date(); today.setHours(0,0,0,0);
+    const week = new Date(today); week.setDate(week.getDate()+7);
+    const upcoming = data.filter(a => {
+      const d = new Date(a.date);
+      return d >= today && d <= week && a.status !== 'cancelled';
+    }).sort((a,b) => new Date(a.date)-new Date(b.date));
+    const utbody = document.getElementById('upcoming-tbody');
+    if (!upcoming.length) {
+      utbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="es-icon">📭</div><h4>No upcoming appointments</h4><p>Next 7 days are clear.</p></div></td></tr>`;
+    } else {
+      utbody.innerHTML = upcoming.map(a => `
+        <tr>
+          <td><div class="td-name">${esc(a.name)}</div></td>
+          <td class="td-phone"><a href="tel:${esc(a.phone)}">${esc(a.phone)}</a></td>
+          <td>${esc(a.service)}</td>
+          <td>${esc(a.date)}</td>
+          <td>${esc(a.time)}</td>
+          <td>${badgeHtml(a.status)}</td>
+        </tr>`).join('');
+    }
+  }
+
+  // ─── EXPORT CSV ───
+  function exportCSV() {
+    const data = getAppointments();
+    if (!data.length) { showToast('⚠️ No data to export.'); return; }
+    const headers = ['ID','Name','Phone','Service','Date','Time','Status','Notes','Booked At'];
+    const rows = data.map(a => [a.id, a.name, a.phone, a.service, a.date, a.time, a.status, a.note || '', new Date(a.bookedAt).toLocaleString('en-IN')]);
+    const csv = [headers, ...rows].map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type:'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `drMehta-appointments-${Date.now()}.csv`; a.click();
+    URL.revokeObjectURL(url);
+    showToast('⬇️ CSV exported!');
+  }
+
+  // ─── TOAST ───
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ─── UTILS ───
+  function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  // ─── RESPONSIVE ───
+  window.addEventListener('resize', () => {
+    document.getElementById('menu-toggle').style.display = window.innerWidth <= 768 ? 'block' : 'none';
+  });
+
+  // Close modal on overlay click
+  document.getElementById('detail-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
